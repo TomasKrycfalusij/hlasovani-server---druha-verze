@@ -7,6 +7,7 @@ name = "vote"
 name = "send"
 number = 1
 value = 0
+posuvnik_1 = 1
 send_message = True
 list_of_votes = [{"serial": my_serial, "volba": 2}]
 print(list_of_votes[0])
@@ -56,11 +57,17 @@ def voted(data):
         break
 
 def on_received_value(name, value):
-    global list_of_votes
+    global list_of_votes, posuvnik_1
     basic.show_number(value)
     list_of_votes.append([{"serial": int(name), "volba": value}][0])
-    print("tohle")
+    print("Toto byl tvůj hlas")
     print([{"serial": int(name), "volba": value}][0])
-    print("netohle")
-    print(list_of_votes)
+    posuvnik_2 = 0
+    for i in range(posuvnik_1):
+        print("Toto je posuvník 2")
+        print(posuvnik_2)
+        print("Toto je list tvým minulých hlasů")
+        print(list_of_votes[posuvnik_2])
+        posuvnik_2 += 1
+    posuvnik_1 += 1
 radio.on_received_value(on_received_value)

@@ -6,6 +6,7 @@ let name = "vote"
 name = "send"
 let number = 1
 let value = 0
+let posuvnik_1 = 1
 let send_message = true
 let list_of_votes = [ {
     "serial" : my_serial,
@@ -67,12 +68,19 @@ radio.onReceivedValue(function on_received_value(name: string, value: number) {
         "volba" : value,
     }
     ][0])
-    console.log("tohle")
+    console.log("Toto byl tvůj hlas")
     console.log([ {
         "serial" : parseInt(name),
         "volba" : value,
     }
     ][0])
-    console.log("netohle")
-    console.log(list_of_votes)
+    let posuvnik_2 = 0
+    for (let i = 0; i < posuvnik_1; i++) {
+        console.log("Toto je posuvník 2")
+        console.log(posuvnik_2)
+        console.log("Toto je list tvým minulých hlasů")
+        console.log(list_of_votes[posuvnik_2])
+        posuvnik_2 += 1
+    }
+    posuvnik_1 += 1
 })
