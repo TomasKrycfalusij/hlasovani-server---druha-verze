@@ -8,7 +8,7 @@ let number = 1
 let value = 0
 let send_message = true
 let list_of_votes = [ {
-    "serial" : value,
+    "serial" : my_serial,
     "volba" : 2,
 }
 ]
@@ -62,7 +62,17 @@ function voted(data: number) {
 radio.onReceivedValue(function on_received_value(name: string, value: number) {
     
     basic.showNumber(value)
-    // list_of_votes.insert(int(name))
-    // list_of_votes.append.(value)
+    list_of_votes.push([ {
+        "serial" : parseInt(name),
+        "volba" : value,
+    }
+    ][0])
+    console.log("tohle")
+    console.log([ {
+        "serial" : parseInt(name),
+        "volba" : value,
+    }
+    ][0])
+    console.log("netohle")
     console.log(list_of_votes)
 })
