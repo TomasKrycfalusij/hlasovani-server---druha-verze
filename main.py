@@ -1,13 +1,15 @@
 # ÚVOD
 # 1. Zmáčknutí A/B/dotykového tlačítka/pinu 2 se odešle hlas
 # 2. Pinem 0 se nastaví přijímání hlasů
-# 3. V konzoli to vypíše váš aktuální hlas a sériové číslo microbitu
-# 4. Vypíše všechny vaše předešlé hlasy (budou uloženy v listu)
-# 5. Samotné čísílko mezi hlasy určuje o kolikátou pozici v listu hlasů se jedná
-# 6. Nepřišel jsem na způsob jak na detekci sériového čísla v listu,
-#    přesněji pozice a jak funduje přiřazování v takovém stylu listu
-# 7. UPOZORNĚNÍ - Horní microbit je ten hlavní, proto je možné, že ikdyž deaktivujete hlasování
-#    na jednom, druhý bude stále moci přijímat hlasy. Proto pro odesílání hlasu používejte "spodní"
+# 3. Pinem 1 se snažou všechny hlasy
+# 4. V konzoli to vypíše váš aktuální hlas a sériové číslo microbitu
+# 5. Vypíše všechny vaše předešlé hlasy (budou uloženy v listu)
+# 6. Samotné čísílko mezi hlasy určuje o kolikátou pozici v listu hlasů se jedná
+# 7. Nepřišel jsem na způsob jak na detekci sériového čísla v listu,
+#    přesněji pozice a jak funduje přiřazování v takovém stylu listu, proto je program nedokončený
+# 8. UPOZORNĚNÍ - Horní microbit je ten hlasovací, proto je možné, že ikdyž deaktivujete hlasování
+#    na jednom, druhý bude stále moci přijímat hlasy. Proto pro odesílání hlasu používejte "horní"
+#    a ten spodní jako "serverový" pro lepší orientaci
 
 radio.set_group(69)
 radio.set_transmit_power(7)
@@ -22,6 +24,18 @@ value = 0
 posuvnik_1 = 1
 receive_message = True
 list_of_votes = [{"serial": my_serial, "volba": 0}]
+
+#Smazání dosavadních hlasů
+def smazani_hlasu():
+    global list_of_votes, posuvnik_1
+    list_of_votes = [{"serial": my_serial, "volba": 0}]
+    basic.show_icon(IconNames.TARGET)
+    print("Hlasy byly smazány")
+    basic.clear_screen()
+    posuvnik = 1
+input.on_pin_pressed(TouchPin.P1, smazani_hlasu)
+
+
 
 #ZAPNUTÍ A VYPNUTÍ MOŽNOSTI HLASOVAT
 def zapinani_hlasovani():

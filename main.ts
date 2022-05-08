@@ -1,13 +1,15 @@
 //  ÚVOD
 //  1. Zmáčknutí A/B/dotykového tlačítka/pinu 2 se odešle hlas
 //  2. Pinem 0 se nastaví přijímání hlasů
-//  3. V konzoli to vypíše váš aktuální hlas a sériové číslo microbitu
-//  4. Vypíše všechny vaše předešlé hlasy (budou uloženy v listu)
-//  5. Samotné čísílko mezi hlasy určuje o kolikátou pozici v listu hlasů se jedná
-//  6. Nepřišel jsem na způsob jak na detekci sériového čísla v listu,
-//     přesněji pozice a jak funduje přiřazování v takovém stylu listu
-//  7. UPOZORNĚNÍ - Horní microbit je ten hlavní, proto je možné, že ikdyž deaktivujete hlasování
-//     na jednom, druhý bude stále moci přijímat hlasy. Proto pro odesílání hlasu používejte "spodní"
+//  3. Pinem 1 se snažou všechny hlasy
+//  4. V konzoli to vypíše váš aktuální hlas a sériové číslo microbitu
+//  5. Vypíše všechny vaše předešlé hlasy (budou uloženy v listu)
+//  6. Samotné čísílko mezi hlasy určuje o kolikátou pozici v listu hlasů se jedná
+//  7. Nepřišel jsem na způsob jak na detekci sériového čísla v listu,
+//     přesněji pozice a jak funduje přiřazování v takovém stylu listu, proto je program nedokončený
+//  8. UPOZORNĚNÍ - Horní microbit je ten hlasovací, proto je možné, že ikdyž deaktivujete hlasování
+//     na jednom, druhý bude stále moci přijímat hlasy. Proto pro odesílání hlasu používejte "horní"
+//     a ten spodní jako "serverový" pro lepší orientaci
 radio.setGroup(69)
 radio.setTransmitPower(7)
 radio.setTransmitSerialNumber(true)
@@ -24,6 +26,19 @@ let list_of_votes = [ {
     "volba" : 0,
 }
 ]
+// Smazání dosavadních hlasů
+input.onPinPressed(TouchPin.P1, function smazani_hlasu() {
+    
+    list_of_votes = [ {
+        "serial" : my_serial,
+        "volba" : 0,
+    }
+    ]
+    basic.showIcon(IconNames.Target)
+    console.log("Hlasy byly smazány")
+    basic.clearScreen()
+    let posuvnik = 1
+})
 // ZAPNUTÍ A VYPNUTÍ MOŽNOSTI HLASOVAT
 input.onPinPressed(TouchPin.P0, function zapinani_hlasovani() {
     
