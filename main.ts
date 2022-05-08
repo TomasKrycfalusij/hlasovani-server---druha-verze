@@ -16,6 +16,7 @@ input.onPinPressed(TouchPin.P0, function dissable_client() {
     }
     
 })
+// HLASOVANI CISEL
 input.onButtonPressed(Button.A, function voting_A() {
     
     basic.showString("A")
@@ -44,6 +45,7 @@ input.onPinPressed(TouchPin.P2, function voting_D() {
     basic.pause(500)
     basic.clearScreen()
 })
+// ----------------------------------------------
 function voted(data: number) {
     while (send_message == true) {
         
