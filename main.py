@@ -8,8 +8,7 @@ name= "send"
 number= 1
 value= 0
 send_message = True
-list_of_votes = [0,0,0,0]
-
+list_of_votes = [0]
 def dissable_client():
     if name == "send" and number == 0:
         radio.send_value("send", 1)
@@ -52,11 +51,13 @@ input.on_pin_pressed(TouchPin.P2, voting_D)
 def voted(data):
     while send_message == True:
         global list_of_votes
-        radio.send_value("vote", data)
+        radio.send_value(str(my_serial), data)
         break
 
 def on_received_value(name, value):
+    global list_of_votes
     basic.show_number(value)
-    list_of_votes[value] +=1
+    list_of_votes.append(int(name))
+    list_of_votes.append(value)
     print(list_of_votes)
 radio.on_received_value(on_received_value)

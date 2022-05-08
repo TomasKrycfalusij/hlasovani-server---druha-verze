@@ -7,7 +7,7 @@ name = "send"
 let number = 1
 let value = 0
 let send_message = true
-let list_of_votes = [0, 0, 0, 0]
+let list_of_votes = [0]
 input.onPinPressed(TouchPin.P0, function dissable_client() {
     if (name == "send" && number == 0) {
         radio.sendValue("send", 1)
@@ -47,13 +47,15 @@ input.onPinPressed(TouchPin.P2, function voting_D() {
 function voted(data: number) {
     while (send_message == true) {
         
-        radio.sendValue("vote", data)
+        radio.sendValue("" + my_serial, data)
         break
     }
 }
 
 radio.onReceivedValue(function on_received_value(name: string, value: number) {
+    
     basic.showNumber(value)
-    list_of_votes[value] += 1
+    list_of_votes.push(parseInt(name))
+    list_of_votes.push(value)
     console.log(list_of_votes)
 })
