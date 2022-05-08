@@ -7,7 +7,12 @@ name = "send"
 let number = 1
 let value = 0
 let send_message = true
-let list_of_votes = [0]
+let list_of_votes = [ {
+    "serial" : value,
+    "volba" : 2,
+}
+]
+console.log(list_of_votes[0])
 input.onPinPressed(TouchPin.P0, function dissable_client() {
     if (name == "send" && number == 0) {
         radio.sendValue("send", 1)
@@ -57,7 +62,7 @@ function voted(data: number) {
 radio.onReceivedValue(function on_received_value(name: string, value: number) {
     
     basic.showNumber(value)
-    list_of_votes.push(parseInt(name))
-    list_of_votes.push(value)
+    // list_of_votes.insert(int(name))
+    // list_of_votes.append.(value)
     console.log(list_of_votes)
 })

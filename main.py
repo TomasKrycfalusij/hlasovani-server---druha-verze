@@ -9,8 +9,7 @@ number = 1
 value = 0
 send_message = True
 list_of_votes = [{"serial": value, "volba": 2}]
-
-
+print(list_of_votes[0])
 
 
 def dissable_client():
@@ -59,7 +58,7 @@ def voted(data):
 def on_received_value(name, value):
     global list_of_votes
     basic.show_number(value)
-    list_of_votes.append(int(name))
-    list_of_votes.append.(value)
+    #list_of_votes.insert(int(name))
+    #list_of_votes.append.(value)
     print(list_of_votes)
 radio.on_received_value(on_received_value)
